@@ -1,0 +1,100 @@
+Unilasalle-RJ - AV2
+Aluno: (rafaela pereira de olveira santos 0050010497)
+Prova Av2 de Laboratorio de Sistemas Operacionais
+Professor: Alex Salgado
+1o. Semestre de 2017   Turno: noite
+--------------------------------------------------
+1-Faça um script shell que receba um nome de arquivo como parametro e 
+responde se este arquivo existe ou não.
+
+#!/bin/bash
+arq=$1
+if [ -f $arq ]
+then
+	echo -e "O $arq existe"
+else
+	echo -e "O $arq não existe"
+fi
+
+2-Reescreva o codigo abaixo usando a estrutura for.
+#!/bin/bash
+cont=$1
+fat=1
+while [ $cont -gt 0 ] 
+do
+   fat=$(( $fat * $cont ))
+   cont=$(( $cont - 1 ))
+done
+echo $fat
+
+#!/bin/bash
+echo "Informe um valor:"
+read valor
+
+fat=1
+
+for ((i=1;i<=$valor;i++))
+do
+	fat=$(($fat*$i))
+done
+echo "Fatorial de $valor:$fat"
+
+
+
+3-Usando estrutura de repetição, faça um script para exibir todos os arquivos
+da pasta atual com tamanho = 0kb (vazio).
+
+#!/bin/bash
+for arq in $(ls .)
+do
+if [ -f $arq ] 
+then
+	kb=$(wc -c < $arq)
+if [ $kb == 0 ]
+then
+	echo "$arq"
+fi
+fi
+	done
+
+4-Usando estrutura de repetição, faça um script para ler a PASTA ATUAL, calcular e exibir:
+- O total de arquivos lidos
+- O total de arquivos com a extensão .txt 
+- O total de arquivos com a extensão .c
+- O total de arquivos com a extensão .py
+
+#!/bin/bash
+txt=0
+c=0
+py=0
+total=0
+
+for arq in $(ls .)
+do
+case "$arq" in
+
+*.txt)
+  txt=$(($txt + 1))
+  total=$(($total + 1))
+;;
+
+*.c)
+  c=$(($c + 1))
+  total=$((total + 1))
+;;
+
+*.py)
+  py=$(($py + 1))
+  total=$(($total + 1))
+;;
+
+*)
+;;
+
+esac
+done
+echo "Quantidade de arquivos total=$total"
+echo "Quantidade de arquivos txt=$txt"
+echo "Quantidade de arquivos c=$c"
+echo "Quantidade de arquivos py=$py"
+
